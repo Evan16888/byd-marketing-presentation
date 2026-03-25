@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BYD - Marketing in the Digital World</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --dk: #0f2044;
+  --dk2: #1a3060;
+  --blue: #2e75b6;
+  --accent: #4a9eff;
+  --white: #ffffff;
+  --gray: #64748b;
+  --text: #1e293b;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0a;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.slide-container {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+}
+
+.slide.active { opacity: 1; pointer-events: auto; }
+
+/* ===== Title Slide ===== */
+.slide-title {
+  background: linear-gradient(135deg, #0b1a3e 0%, #1a3a6e 40%, #1e4f8f 100%);
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.slide-title::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -30%;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(46,117,182,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.slide-title .title-content { position: relative; z-index: 2; padding: 60px; }
+.slide-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff 0%, #a8d0f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.slide-title .divider {
+  width: 140px; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+  margin: 28px auto;
+  border-radius: 2px;
+}
+.slide-title h2 {
+  font-size: 30px;
+  font-weight: 300;
+  color: #b0c8e8;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.slide-title .meta {
+  font-size: 20px;
+  color: #7a9aba;
+  margin-top: 24px;
+  letter-spacing: 1px;
+}
+.slide-title .title-img {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 420px; height: 280px;
+  object-fit: cover;
+  opacity: 0.15;
+  mask-image: linear-gradient(to left, black 40%, transparent);
+  -webkit-mask-image: linear-gradient(to left, black 40%, transparent);
+}
+
+/* ===== Content Slides ===== */
+.slide-content { display: flex; flex-direction: column; }
+
+.slide-header {
+  background: linear-gradient(135deg, #0f2044, #1a3a6e);
+  padding: 22px 50px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.slide-header .slide-icon {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.slide-header h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.slide-body {
+  flex: 1;
+  padding: 28px 50px 16px;
+  display: flex;
+  gap: 30px;
+  overflow: hidden;
+}
+.slide-body.single-col { flex-direction: column; gap: 0; }
+
+.col { flex: 1; display: flex; flex-direction: column; }
+
+.col-img {
+  flex: 0 0 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.col-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.col-img .img-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 18px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 0 0 12px 12px;
+}
+
+/* ===== Typography — 24pt base ===== */
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--dk);
+  margin: 14px 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title:first-child { margin-top: 0; }
+.section-title .dot {
+  width: 10px; height: 10px;
+  background: var(--blue);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+ul { list-style: none; padding: 0; margin: 0; }
+ul li {
+  font-size: 24px;
+  line-height: 1.45;
+  color: #374151;
+  padding: 4px 0 4px 30px;
+  position: relative;
+}
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 17px;
+  width: 8px; height: 8px;
+  background: var(--blue);
+  border-radius: 50%;
+}
+
+/* Force cards */
+.forces-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  flex: 1;
+}
+.force-card {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 16px 20px;
+  border-left: 4px solid var(--blue);
+}
+.force-card.center-card {
+  grid-column: 1 / -1;
+  max-width: 55%;
+  justify-self: center;
+}
+.force-card h4 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dk);
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.force-card h4 .level {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.level-high { background: #fee2e2; color: #dc2626; }
+.level-mod { background: #fef3c7; color: #d97706; }
+.level-low { background: #d1fae5; color: #059669; }
+.force-card p { font-size: 20px; color: #4b5563; line-height: 1.4; }
+
+/* STP */
+.stp-flow { display: flex; gap: 18px; flex: 1; }
+.stp-block {
+  flex: 1;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 18px 20px;
+  border-top: 4px solid var(--blue);
+}
+.stp-block:nth-child(2) { border-top-color: #6366f1; }
+.stp-block:nth-child(3) { border-top-color: #10b981; }
+.stp-block h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--dk);
+  margin-bottom: 8px;
+}
+.stp-block ul li { font-size: 20px; padding-left: 24px; }
+.stp-block ul li::before { left: 4px; top: 13px; width: 7px; height: 7px; }
+
+/* Comparison table */
+.comp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.comp-table thead th {
+  background: var(--dk);
+  color: white;
+  padding: 14px 16px;
+  font-weight: 600;
+  text-align: left;
+  font-size: 22px;
+}
+.comp-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  line-height: 1.4;
+  font-size: 20px;
+}
+.comp-table tbody tr:nth-child(even) { background: #f8fafc; }
+.comp-table tbody tr:last-child td { border-bottom: none; }
+.comp-table .highlight { color: var(--blue); font-weight: 600; }
+
+/* Challenge cards */
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  flex: 1;
+}
+.challenge-card {
+  background: linear-gradient(135deg, #fefefe, #f8fafc);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+.challenge-card h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dk);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.challenge-card p { font-size: 20px; color: #4b5563; line-height: 1.4; }
+
+/* Driver cards */
+.driver-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+}
+.driver-card {
+  background: linear-gradient(135deg, #eff6ff, #f0f9ff);
+  border-radius: 12px;
+  padding: 18px 20px;
+  border: 1px solid #dbeafe;
+}
+.driver-card .driver-num {
+  width: 32px; height: 32px;
+  background: var(--blue);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.driver-card h4 { font-size: 24px; font-weight: 700; color: var(--dk); margin-bottom: 6px; }
+.driver-card p { font-size: 20px; color: #4b5563; line-height: 1.4; }
+.driver-card .driver-theory { font-size: 18px; color: #6366f1; font-style: italic; margin-top: 6px; }
+
+/* References */
+.ref-list { padding: 0; margin: 0; list-style: none; }
+.ref-list li {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #374151;
+  padding: 5px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.ref-list li::before { display: none; }
+.ref-list li:last-child { border-bottom: none; }
+
+/* Footer */
+.slide-footer {
+  height: 6px;
+  background: linear-gradient(90deg, var(--blue), var(--accent));
+  flex-shrink: 0;
+}
+.slide-num {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  font-size: 16px;
+  color: #94a3b8;
+  font-weight: 500;
+  z-index: 10;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 24px;
+  user-select: none;
+}
+.nav-btn {
+  width: 44px; height: 44px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #aaa;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: rgba(255,255,255,0.15); color: white; border-color: rgba(255,255,255,0.4); }
+.nav-dots { display: flex; gap: 6px; }
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-dot.active { background: var(--accent); transform: scale(1.3); }
+.key-hint { color: #555; font-size: 12px; margin-top: 12px; }
+
+@media print {
+  body { background: white; }
+  .nav, .key-hint { display: none; }
+  .slide-container { box-shadow: none; page-break-after: always; }
+  .slide { opacity: 1 !important; pointer-events: auto !important; position: relative; }
+}
+</style>
+</head>
+<body>
+
+<div class="slide-container">
+
+<!-- ===== SLIDE 1: Title ===== -->
+<div class="slide slide-title active" data-slide="0">
+  <img class="title-img" src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80" alt="EV">
+  <div class="title-content">
+    <h1>BYD</h1>
+    <div class="divider"></div>
+    <h2>Marketing in the Digital World</h2>
+    <p class="meta">MN7032SR &nbsp;|&nbsp; Group Presentation &nbsp;|&nbsp; April 2026</p>
+  </div>
+</div>
+
+<!-- ===== SLIDE 2: Executive Summary ===== -->
+<div class="slide slide-content" data-slide="1">
+  <div class="slide-header">
+    <div class="slide-icon">📋</div>
+    <h2>Executive Summary</h2>
+  </div>
+  <div class="slide-body">
+    <div class="col">
+      <ul>
+        <li><strong>BYD (Build Your Dreams)</strong> — world's largest NEV producer, selling over 3 million EVs globally in 2024 (Statista, 2025)</li>
+        <li><strong>Vertically integrated</strong> across batteries, semiconductors, motors, and vehicle manufacturing</li>
+        <li>The <strong>US–Iran conflict</strong> and energy crisis are accelerating the global shift toward EVs, creating major opportunities for BYD</li>
+        <li>This presentation covers <strong>PESTLE, Porter's Five Forces, STP strategy, competitor comparison, challenges, and success drivers</strong></li>
+      </ul>
+    </div>
+    <div class="col-img">
+      <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80" alt="EV Manufacturing">
+      <div class="img-overlay">BYD Global Operations</div>
+    </div>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">2 / 10</span>
+</div>
+
+<!-- ===== SLIDE 3: PESTLE 1/2 ===== -->
+<div class="slide slide-content" data-slide="2">
+  <div class="slide-header">
+    <div class="slide-icon">🌍</div>
+    <h2>PESTLE Analysis (1/2)</h2>
+  </div>
+  <div class="slide-body">
+    <div class="col">
+      <div class="section-title"><span class="dot"></span>Political</div>
+      <ul>
+        <li>China's NEV subsidies &amp; 'Made in China 2025' policy</li>
+        <li>EU anti-subsidy tariffs up to <strong>38.1%</strong> on Chinese EVs</li>
+        <li><strong>US–Iran conflict</strong> threatening Strait of Hormuz oil routes (BBC News, 2026)</li>
+      </ul>
+      <div class="section-title"><span class="dot"></span>Economic</div>
+      <ul>
+        <li>US–Iran crisis pushing oil above <strong>$100/barrel</strong>, accelerating EV demand (Reuters, 2026)</li>
+        <li>BYD's cost leadership: <strong>£10,000–£50,000</strong> range</li>
+      </ul>
+      <div class="section-title"><span class="dot"></span>Social</div>
+      <ul>
+        <li>Growing eco-awareness &amp; urbanisation driving EV adoption</li>
+      </ul>
+    </div>
+    <div class="col-img">
+      <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=80" alt="Global Politics">
+      <div class="img-overlay">Global Market Environment</div>
+    </div>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">3 / 10</span>
+</div>
+
+<!-- ===== SLIDE 4: PESTLE 2/2 ===== -->
+<div class="slide slide-content" data-slide="3">
+  <div class="slide-header">
+    <div class="slide-icon">🔬</div>
+    <h2>PESTLE Analysis (2/2)</h2>
+  </div>
+  <div class="slide-body">
+    <div class="col">
+      <div class="section-title"><span class="dot"></span>Technological</div>
+      <ul>
+        <li>Proprietary <strong>Blade Battery</strong> — enhanced safety &amp; range</li>
+        <li><strong>e-Platform 3.0</strong> for autonomous driving &amp; connectivity</li>
+      </ul>
+      <div class="section-title"><span class="dot"></span>Legal</div>
+      <ul>
+        <li>EU Battery Regulation — sustainable sourcing &amp; recycling</li>
+        <li>GDPR compliance for connected vehicles</li>
+      </ul>
+      <div class="section-title"><span class="dot"></span>Environmental</div>
+      <ul>
+        <li>Paris Agreement carbon neutrality targets driving EV adoption</li>
+        <li>Circular economy expectations for battery lifecycle</li>
+      </ul>
+    </div>
+    <div class="col-img">
+      <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="Technology">
+      <div class="img-overlay">Innovation &amp; Technology</div>
+    </div>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">4 / 10</span>
+</div>
+
+<!-- ===== SLIDE 5: Porter's Five Forces ===== -->
+<div class="slide slide-content" data-slide="4">
+  <div class="slide-header">
+    <div class="slide-icon">⚡</div>
+    <h2>Porter's Five Forces</h2>
+  </div>
+  <div class="slide-body single-col">
+    <div class="forces-grid">
+      <div class="force-card">
+        <h4>New Entrants <span class="level level-mod">Moderate</span></h4>
+        <p>High capital barriers, but Apple &amp; Xiaomi entering via platform advantages</p>
+      </div>
+      <div class="force-card">
+        <h4>Supplier Power <span class="level level-low">Low</span></h4>
+        <p>BYD's vertical integration — in-house battery, chip &amp; motor production</p>
+      </div>
+      <div class="force-card">
+        <h4>Buyer Power <span class="level level-mod">Moderate</span></h4>
+        <p>Growing choices &amp; price sensitivity in mass-market EV segment</p>
+      </div>
+      <div class="force-card">
+        <h4>Substitutes <span class="level level-mod">Moderate</span></h4>
+        <p>Hydrogen fuel cells, public transport &amp; hybrid vehicles as alternatives</p>
+      </div>
+      <div class="force-card center-card">
+        <h4>Rivalry <span class="level level-high">High</span></h4>
+        <p>Intense competition: Tesla, Toyota, VW, NIO, Hyundai — price wars &amp; tech race</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">5 / 10</span>
+</div>
+
+<!-- ===== SLIDE 6: STP Strategy ===== -->
+<div class="slide slide-content" data-slide="5">
+  <div class="slide-header">
+    <div class="slide-icon">🎯</div>
+    <h2>STP Strategy</h2>
+  </div>
+  <div class="slide-body single-col">
+    <div class="stp-flow">
+      <div class="stp-block">
+        <h3>Segmentation</h3>
+        <ul>
+          <li><strong>Geographic:</strong> China, SE Asia, Europe, LatAm</li>
+          <li><strong>Demographic:</strong> Families, fleet operators, young professionals</li>
+          <li><strong>Psychographic:</strong> Eco-conscious, tech adopters</li>
+        </ul>
+      </div>
+      <div class="stp-block">
+        <h3>Targeting</h3>
+        <ul>
+          <li><strong>Mass:</strong> Dolphin, Seagull</li>
+          <li><strong>Mid-range:</strong> Atto 3, Song Plus</li>
+          <li><strong>Premium:</strong> Han, Seal</li>
+        </ul>
+      </div>
+      <div class="stp-block">
+        <h3>Positioning</h3>
+        <ul>
+          <li><strong>"Affordable Premium EV"</strong></li>
+          <li>Advanced tech at accessible prices</li>
+          <li>Between budget &amp; luxury (Kotler &amp; Keller, 2016)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">6 / 10</span>
+</div>
+
+<!-- ===== SLIDE 7: Competitor Comparison ===== -->
+<div class="slide slide-content" data-slide="6">
+  <div class="slide-header">
+    <div class="slide-icon">📊</div>
+    <h2>Competitor STP Comparison</h2>
+  </div>
+  <div class="slide-body single-col">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width:20%">Criteria</th>
+          <th style="width:28%">BYD</th>
+          <th style="width:26%">Tesla</th>
+          <th style="width:26%">Toyota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Target</strong></td>
+          <td class="highlight">Mass → Premium</td>
+          <td>Premium / Tech</td>
+          <td>Mass / Hybrid</td>
+        </tr>
+        <tr>
+          <td><strong>Position</strong></td>
+          <td class="highlight">Affordable Premium</td>
+          <td>Innovation Leader</td>
+          <td>Reliability Leader</td>
+        </tr>
+        <tr>
+          <td><strong>Range</strong></td>
+          <td class="highlight">20+ EV models</td>
+          <td>4 core models</td>
+          <td>Limited BEV</td>
+        </tr>
+        <tr>
+          <td><strong>Pricing</strong></td>
+          <td class="highlight">Cost Leadership</td>
+          <td>Premium Pricing</td>
+          <td>Competitive</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:22px; color:#4b5563; margin-top:18px; line-height:1.5;">
+      <strong>Key Insight:</strong> BYD's wider range provides broader coverage, but risks brand dilution vs Tesla's focused premium strategy (Hooley et al., 2020)
+    </p>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">7 / 10</span>
+</div>
+
+<!-- ===== SLIDE 8: Challenges ===== -->
+<div class="slide slide-content" data-slide="7">
+  <div class="slide-header">
+    <div class="slide-icon">⚠️</div>
+    <h2>Challenges and Barriers</h2>
+  </div>
+  <div class="slide-body single-col">
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <h4>🏷️ Brand Recognition</h4>
+        <p>Low awareness in Western markets; needs major marketing investment (Keller, 2013)</p>
+      </div>
+      <div class="challenge-card">
+        <h4>🌐 Geopolitical Risk</h4>
+        <p>EU tariffs (38.1%); US–Iran conflict disrupting energy supply &amp; shipping routes</p>
+      </div>
+      <div class="challenge-card">
+        <h4>🔍 Quality Perception</h4>
+        <p>"Made in China" stigma in premium segments; trust-building required</p>
+      </div>
+      <div class="challenge-card">
+        <h4>🏪 Distribution</h4>
+        <p>Underdeveloped dealer &amp; service networks in Europe and Americas</p>
+      </div>
+      <div class="challenge-card">
+        <h4>🌏 Cultural Adaptation</h4>
+        <p>Must localise marketing &amp; design for diverse regional preferences</p>
+      </div>
+      <div class="challenge-card">
+        <h4>📜 Regulation</h4>
+        <p>Complex compliance across markets: data privacy, safety, environment</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">8 / 10</span>
+</div>
+
+<!-- ===== SLIDE 9: Success Drivers ===== -->
+<div class="slide slide-content" data-slide="8">
+  <div class="slide-header">
+    <div class="slide-icon">🚀</div>
+    <h2>Key Success Drivers</h2>
+  </div>
+  <div class="slide-body single-col">
+    <div class="driver-grid">
+      <div class="driver-card">
+        <div class="driver-num">1</div>
+        <h4>Vertical Integration</h4>
+        <p>In-house battery, chips &amp; motors — cost advantage &amp; supply resilience</p>
+        <div class="driver-theory">Resource-Based View (Barney, 1991)</div>
+      </div>
+      <div class="driver-card">
+        <div class="driver-num">2</div>
+        <h4>Cost Leadership</h4>
+        <p>Economies of scale enabling aggressive pricing without margin loss</p>
+        <div class="driver-theory">Porter's Generic Strategies (1985)</div>
+      </div>
+      <div class="driver-card">
+        <div class="driver-num">3</div>
+        <h4>Tech Innovation</h4>
+        <p>Blade Battery, e-Platform 3.0 &amp; intelligent driving as core competencies</p>
+        <div class="driver-theory">Core Competence (Prahalad &amp; Hamel, 1990)</div>
+      </div>
+      <div class="driver-card">
+        <div class="driver-num">4</div>
+        <h4>Digital Marketing</h4>
+        <p>Social media, KOL partnerships &amp; digital platforms for global reach</p>
+        <div class="driver-theory">Chaffey &amp; Ellis-Chadwick (2019)</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">9 / 10</span>
+</div>
+
+<!-- ===== SLIDE 10: References ===== -->
+<div class="slide slide-content" data-slide="9">
+  <div class="slide-header">
+    <div class="slide-icon">📚</div>
+    <h2>References</h2>
+  </div>
+  <div class="slide-body single-col" style="overflow-y:auto;">
+    <ul class="ref-list">
+      <li>Barney, J.B. (1991) 'Firm resources and sustained competitive advantage', <em>Journal of Management</em>, 17(1), pp. 99–120.</li>
+      <li>BBC News (2026) 'How the US–Iran conflict is reshaping global energy markets', <em>BBC News</em>, 18 Feb.</li>
+      <li>Chaffey, D. and Ellis-Chadwick, F. (2019) <em>Digital Marketing</em>. 7th edn. Harlow: Pearson.</li>
+      <li>Hooley, G. et al. (2020) <em>Marketing Strategy and Competitive Positioning</em>. 7th edn. Pearson.</li>
+      <li>Keller, K.L. (2013) <em>Strategic Brand Management</em>. 4th edn. Harlow: Pearson.</li>
+      <li>Kotler, P. and Keller, K.L. (2016) <em>Marketing Management</em>. 15th edn. Pearson.</li>
+      <li>Porter, M.E. (1985) <em>Competitive Advantage</em>. New York: Free Press.</li>
+      <li>Prahalad, C.K. and Hamel, G. (1990) 'The core competence of the corporation', <em>HBR</em>, 68(3), pp. 79–91.</li>
+      <li>Reuters (2026) 'US–Iran tensions push oil prices above $100/barrel', <em>Reuters</em>, 12 Feb.</li>
+      <li>Statista (2025) <em>BYD global vehicle sales 2024</em>. Available at: https://www.statista.com</li>
+    </ul>
+  </div>
+  <div class="slide-footer"></div>
+  <span class="slide-num">10 / 10</span>
+</div>
+
+</div>
+
+<div class="nav">
+  <button class="nav-btn" onclick="changeSlide(-1)">◀</button>
+  <div class="nav-dots" id="navDots"></div>
+  <button class="nav-btn" onclick="changeSlide(1)">▶</button>
+</div>
+<div class="key-hint">Use ← → arrow keys to navigate</div>
+
+<script>
+let current = 0;
+const total = 10;
+function init() {
+  const dots = document.getElementById('navDots');
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dots.appendChild(d);
+  }
+}
+function goTo(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+  current = n;
+  document.querySelector(`[data-slide="${current}"]`).classList.add('active');
+  document.querySelectorAll('.nav-dot')[current].classList.add('active');
+}
+function changeSlide(dir) {
+  let next = current + dir;
+  if (next < 0) next = total - 1;
+  if (next >= total) next = 0;
+  goTo(next);
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+});
+init();
+</script>
+</body>
+</html>
